@@ -26,12 +26,12 @@ solve1 = zeros . scanl step 50 . fmap offset
   offset (TLeft n) = negate n
   offset (TRight n) = n
 
-bound :: Int -> Int
-bound n = (n + 100) `mod` 100
-
 solve2 :: Int -> [Turn] -> Int
 solve2 _ [] = 0
-solve2 pos (TLeft 0 : xs) = solve2 pos xs
-solve2 pos (TLeft n : xs) = solve2 (bound $ pred pos) (TLeft (pred n) : xs) + bool 0 1 (pos == 1)
+solve2 pos (TLeft  0 : xs) = solve2 pos xs
 solve2 pos (TRight 0 : xs) = solve2 pos xs
-solve2 pos (TRight n : xs) = solve2 (bound $ succ pos) (TRight (pred n) : xs) + bool 0 1 (pos == 99)
+solve2 0   (TLeft  n : xs) =        solve2 99  (TLeft  (pred n) : xs)
+solve2 1   (TLeft  n : xs) = succ $ solve2 0   (TLeft  (pred n) : xs)
+solve2 99  (TRight n : xs) = succ $ solve2 0   (TRight (pred n) : xs)
+solve2 pos (TLeft  n : xs) = solve2 (pred pos) (TLeft  (pred n) : xs)
+solve2 pos (TRight n : xs) = solve2 (succ pos) (TRight (pred n) : xs)
