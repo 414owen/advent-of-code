@@ -1,0 +1,25 @@
+cabal-version:      2.4
+name:               aoc2025
+version:            0.1.0
+homepage:           https://github.com/414owen/advent-of-code
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Owen Shepherd
+maintainer:         owen@owen.cafe
+category:           Math
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall -Wno-name-shadowing
+
+executable aoc2025
+    import:           warnings
+    main-is:          Main.hs
+    other-modules:    Day01
+                    , Common
+    build-depends:    base ^>=4.21.0.0
+                    , megaparsec >= 9 && < 10
+                    , text >= 2.1 && < 3
+    hs-source-dirs:   src
+    default-language: Haskell2010
